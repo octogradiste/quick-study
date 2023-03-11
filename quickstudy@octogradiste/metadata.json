@@ -1,0 +1,8 @@
+{
+  "name": "QuickStudy",
+  "description": "Shortcuts to open course files",
+  "uuid": "quickstudy@octogradiste",
+  "shell-version": [
+    "3.36"
+  ]
+}

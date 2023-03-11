@@ -1,0 +1,81 @@
+{
+    "name": "BA4",
+    "basePath": "/home/octogradiste/kDrive/EPFL/BA4/",
+    "weekToNum": {
+        "2023-08": 1,
+        "2023-09": 2,
+        "2023-10": 3,
+        "2023-11": 4,
+        "2023-12": 5,
+        "2023-13": 6,
+        "2023-14": 7,
+        "2023-16": 8,
+        "2023-17": 9,
+        "2023-18": 10,
+        "2023-19": 11,
+        "2023-20": 12,
+        "2023-21": 13,
+        "2023-22": 14
+    },
+    "courses": [
+        {
+            "fullName": "Interaction personne-système",
+            "shortName": "CS213",
+            "urls": [
+                {
+                    "name": "Moodle",
+                    "url": "https://moodle.epfl.ch/course/view.php?id=16439",
+                    "quick": true
+                }
+            ],
+            "apps": [
+                {
+                    "name": "VS Code",
+                    "cmd": "code",
+                    "args": [
+                        "$b/$c/"
+                    ],
+                    "quick": true
+                }
+            ],
+            "structure": [
+                {
+                    "name": "Serie",
+                    "path": "$b/$c/Serie/Week$W/",
+                    "quick": true
+                },
+                {
+                    "name": "Cours",
+                    "path": "$b/$c/Cours/Week$W/lecture_$W.md",
+                    "template": "empty.md",
+                    "quick": true
+                }
+            ],
+            "events": [
+                {
+                    "day": "Thu",
+                    "start": "08:15",
+                    "end": "10:00",
+                    "location": "CO2",
+                    "type": "Cours",
+                    "autoOpen": [
+                        "url-Moodle",
+                        "app-VS Code"
+                    ]
+                },
+                {
+                    "day": "Thu",
+                    "start": "10:15",
+                    "end": "12:00",
+                    "location": "CO2",
+                    "type": "Projet",
+                    "autoOpen": [
+                        "url-Moodle",
+                        "app-VS Code"
+                    ]
+                }
+            ]
+            
+        }
+    ]
+}
