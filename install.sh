@@ -12,7 +12,7 @@ if [ -d "$DIR" ]; then
     if [[ $REPLY =~ ^[Yy]$ ]]; then
         rm -rf "$DIR"
         cp -r "$EXT/" "$DIR"
-        echo "Extension installed."
+        echo "└ Extension installed."
     fi
 else
     cp -r "$EXT/" "$DIR"
@@ -26,15 +26,17 @@ fi
 # If so, ask for the horaire.ics file and run the python script.
 read -p "Do you have a config.json file? [y/N] "
 if [[ $REPLY =~ ^[Yy]$ ]]; then
-    read -p "Enter the path to the config.json file: " CONFIG
+    read -p "└ Enter the path to the config.json file: " CONFIG
     cp "$CONFIG" "$DIR"
-    echo "Config file copied."
+    echo "  └ Config file copied."
 else
-    read -p "Are you a student from the EPFL? [y/N] "
+    read -p "└ Are you a student from the EPFL? [y/N] "
     if [[ $REPLY =~ ^[Yy]$ ]]; then
-        read -p "Enter the path to the horaire.ics file: " ICS
+        echo "  ├ Downlaod the iCalandar file from https://isa.epfl.ch/."
+        read -p "  └ And enter the path to the horaire.ics file: " ICS
         python3 "epfl_generate_config.py" "$ICS" "${DIR}config.json"
-        echo "Config file generated and copied to the extension folder."
+        echo "    ├ Config file generated and copied to the extension folder."
+        echo "    └ Edit ${DIR}config.json for further customization."
     fi
 fi
 
@@ -42,9 +44,7 @@ fi
 read -p "Do you want to enable the extension? [y/N] "
 if [[ $REPLY =~ ^[Yy]$ ]]; then
     gnome-extensions enable "$EXT"
-    echo "Extension enabled."
-else
-    echo "Extension not enabled."
+    echo "└ Extension enabled."
 fi
 
 # Tell the user he needs to log out to restart the gnome shell.
