@@ -2,8 +2,6 @@ from datetime import datetime, timedelta
 import json
 from typing import Dict, List, Tuple
 
-ICS_FILE_NAME = "horaire.ics"
-
 DEFAULT_WEBSITES = [
     {
         "name": "Moodle",
@@ -104,6 +102,15 @@ def extract_events(lines: List[str]) -> List[Event]:
     return events
 
 def events_to_config(events: List[Event]) -> Dict:
+    """Converts the events to a config file.
+
+    Args:
+        events (List[Event]): The events to convert.
+
+    Returns:
+        Dict: The config file.
+    """    
+
     course_names = set(map(lambda event: event[0], events))
 
     to_weekly_event = lambda event: (
@@ -153,13 +160,34 @@ def events_to_config(events: List[Event]) -> Dict:
 
 
 if __name__ == "__main__":
+    import argparse
+
+    parser = argparse.ArgumentParser(
+        description="Converts an ics file to a config file."
+    )
+
+    parser.add_argument(
+        "input", 
+        default="horaire.ics",
+        help="Path to the ics file.", 
+        type=str,
+    )
+
+    parser.add_argument(
+        "output", 
+        default="config.json", 
+        help="Location to save the config file.",
+        type=str
+    )
+
+    args = parser.parse_args()
 
     lines = []
-    with open(ICS_FILE_NAME) as file:
+    with open(args.input) as file:
         lines = file.readlines()
 
     events = extract_events(lines)
     config = events_to_config(events)
 
-    with open("config.json", "w") as outfile:
+    with open(args.output, "w") as outfile:
         json.dump(config, outfile, indent=4, ensure_ascii=False)
