@@ -1,5 +1,5 @@
 {
-    "name": "NAME",
+    "name": "OPTIONAL",
     "basePath": "PATH",
     "weekToNum": {
         "YYYY-WW": 1
@@ -10,14 +10,14 @@
             "shortName": "SHORT NAME",
             "urls": [
                 {
-                    "name": "NAME",
-                    "url": "URI",
+                    "name": "WEBSITE NAME",
+                    "url": "URL",
                     "quick": true
                 }
             ],
             "apps": [
                 {
-                    "name": "NAME",
+                    "name": "APP NAME",
                     "cmd": "CMD",
                     "args": [
                         "ARG"
@@ -27,9 +27,9 @@
             ],
             "structure": [
                 {
-                    "name": "NAME",
+                    "name": "FILE OR FOLDER NAME",
                     "path": "PATH",
-                    "template": "PATH",
+                    "template": "OPTIONAL",
                     "quick": true
                 }
             ],
@@ -38,12 +38,12 @@
                     "day": "WEEK DAY",
                     "start": "HH:MM",
                     "end": "HH:MM",
-                    "type": "TYPE",
-                    "location": "LOCATION",
+                    "type": "OPTIONAL",
+                    "location": "OPTIONAL",
                     "autoOpen": [
-                        "url-NAME",
-                        "app-NAME",
-                        "structure-NAME"
+                        "url-WEBSITE NAME",
+                        "app-APP NAME",
+                        "structure-FILE OR FOLDER NAME"
                     ]
                 }
             ]

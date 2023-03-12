@@ -104,7 +104,7 @@ The following tokens will be replced by the corresponding value:
     "name": "OPTIONAL",
     "basePath": "PATH",
     "weekToNum": {
-        "YYYY-WW": 1,
+        "YYYY-WW": 1
     },
     "courses": [
         {
@@ -114,7 +114,7 @@ The following tokens will be replced by the corresponding value:
                 {
                     "name": "WEBSITE NAME",
                     "url": "URL",
-                    "quick": true,
+                    "quick": true
                 }
             ],
             "apps": [
@@ -122,9 +122,9 @@ The following tokens will be replced by the corresponding value:
                     "name": "APP NAME",
                     "cmd": "CMD",
                     "args": [
-                        "ARG",
+                        "ARG"
                     ],
-                    "quick": true,
+                    "quick": true
                 }
             ],
             "structure": [
@@ -132,7 +132,7 @@ The following tokens will be replced by the corresponding value:
                     "name": "FILE OR FOLDER NAME",
                     "path": "PATH",
                     "template": "OPTIONAL",
-                    "quick": true,
+                    "quick": true
                 }
             ],
             "events": [
@@ -145,10 +145,10 @@ The following tokens will be replced by the corresponding value:
                     "autoOpen": [
                         "url-WEBSITE NAME",
                         "app-APP NAME",
-                        "structure-FILE OR FOLDER NAME",
+                        "structure-FILE OR FOLDER NAME"
                     ]
                 }
-            ],
+            ]
         }
     ]
 }
