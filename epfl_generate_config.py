@@ -2,13 +2,7 @@ from datetime import datetime, timedelta
 import json
 from typing import Dict, List, Tuple
 
-DEFAULT_WEBSITES = [
-    {
-        "name": "Moodle",
-        "url": "https://moodle.epfl.ch/",
-        "quick": True
-    }
-]
+from epfl_moodle_parser import MoodleCourseParser
 
 DEFAULT_APPS = [
     {
@@ -129,7 +123,7 @@ def events_to_config(events: List[Event]) -> Dict:
         course = {
             "fullName": course_name,
             "shortName": "",
-            "urls": DEFAULT_WEBSITES,
+            "urls": [],
             "apps": DEFAULT_APPS,
             "structure": DEFAULT_STRUCTURE,
             "events": [],
@@ -167,10 +161,17 @@ if __name__ == "__main__":
     )
 
     parser.add_argument(
-        "input", 
+        "calendar", 
         default="horaire.ics",
         help="Path to the ics file.", 
         type=str,
+    )
+
+    parser.add_argument(
+        "moodle",
+        default="Dashboard.html",
+        help="Path to the moodle dashboard html website.",
+        type=str
     )
 
     parser.add_argument(
@@ -183,11 +184,28 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     lines = []
-    with open(args.input) as file:
+    with open(args.calendar) as file:
         lines = file.readlines()
 
     events = extract_events(lines)
     config = events_to_config(events)
+
+    page = ""
+    with open(args.moodle) as file:
+        page = file.read()
+    
+    parser = MoodleCourseParser()
+    parser.feed(page)
+
+    for course in config["courses"]:
+        if course["fullName"] in parser.courses:
+            short, url = parser.courses[course["fullName"]]
+            course["shortName"] = short
+            course["urls"].append({
+                "name": "Moodle",
+                "url": url,
+                "quick": True
+            })
 
     with open(args.output, "w") as outfile:
         json.dump(config, outfile, indent=4, ensure_ascii=False)
