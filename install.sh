@@ -5,6 +5,9 @@ DIR=~/.local/share/gnome-shell/extensions/quickstudy@octogradiste/
 
 EXT=quickstudy@octogradiste
 
+# Stores whether or not the user has installed the extension.
+INSTALLED=0
+
 # Check if the extension is already installed.
 # If it does, ask the user if he wants to overwrite it.
 if [ -d "$DIR" ]; then
@@ -13,10 +16,12 @@ if [ -d "$DIR" ]; then
         rm -rf "$DIR"
         cp -r "$EXT/" "$DIR"
         echo "└ Extension installed."
+        INSTALLED=1
     fi
 else
     cp -r "$EXT/" "$DIR"
     echo "Extension installed."
+    INSTALLED=1
 fi
 
 # Ask the user if he has a config.json file.
@@ -33,23 +38,27 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
 else
     read -p "└ Are you a student from the EPFL? [y/N] "
     if [[ $REPLY =~ ^[Yy]$ ]]; then
-        echo "  ├ Downlaod the iCalandar file from https://isa.epfl.ch/."
+        echo "  ├ Download the iCalandar file from https://isa.epfl.ch/."
         echo "  ├ Download the your moodle page from https://moodle.epfl.ch/my/."
         read -p "  ├ Enter the path to the 'horaire.ics' file: " ICS
         read -p "  ├ Enter the path to the 'Dashboard.html' file: " DASHBOARD
         python3 "epfl_generate_config.py" "$ICS" "$DASHBOARD" "${DIR}config.json"
         echo "  ├ Config file generated and copied to the extension folder."
         echo "  └ Edit ${DIR}config.json for further customization."
+    else
+        echo "  ├ Bad luck, you chose the wrong university."
+        echo "  └ You will need to edit ${DIR}config.json by yourself."
     fi
 fi
 
-# Ask the user if he wants to enable the extension.
-read -p "Do you want to enable the extension? [y/N] "
-if [[ $REPLY =~ ^[Yy]$ ]]; then
-    gnome-extensions enable "$EXT"
-    echo "└ Extension enabled."
-fi
+if [ $INSTALLED -eq 1 ]; then
+    # Ask the user if he wants to enable the extension.  
+    read -p "Do you want to enable the extension? [y/N] "
+    if [[ $REPLY =~ ^[Yy]$ ]]; then
+        gnome-extensions enable "$EXT"
+        echo "└ Extension enabled."
+    fi
 
-# Tell the user he needs to log out to restart the gnome shell.
-echo "You need to log out and log back in to restart the gnome shell."
-echo "Or type 'Alt+F2' and then type 'restart' to restart the gnome shell."
+    echo "You need to log out and log back in to restart the gnome shell."
+    echo "Or type 'Alt+F2' and then type 'restart'."
+fi
