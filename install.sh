@@ -32,7 +32,7 @@ fi
 # Then run the python script.
 read -p "Do you have a config.json file? [y/N] "
 if [[ $REPLY =~ ^[Yy]$ ]]; then
-    read -p "└ Enter the path to the config.json file: " CONFIG
+    read -e -p "└ Enter the path to the config.json file: " CONFIG
     cp "$CONFIG" "$DIR"
     echo "  └ Config file copied."
 else
@@ -40,8 +40,8 @@ else
     if [[ $REPLY =~ ^[Yy]$ ]]; then
         echo "  ├ Download the iCalandar file from https://isa.epfl.ch/."
         echo "  ├ Download the your moodle page from https://moodle.epfl.ch/my/."
-        read -p "  ├ Enter the path to the 'horaire.ics' file: " ICS
-        read -p "  ├ Enter the path to the 'Dashboard.html' file: " DASHBOARD
+        read -e -p "  ├ Enter the path to the 'horaire.ics' file: " ICS
+        read -e -p "  ├ Enter the path to the 'Dashboard.html' file: " DASHBOARD
         python3 "epfl_generate_config.py" "$ICS" "$DASHBOARD" "${DIR}config.json"
         echo "  ├ Config file generated and copied to the extension folder."
         echo "  └ Edit ${DIR}config.json for further customization."
@@ -60,5 +60,5 @@ if [ $INSTALLED -eq 1 ]; then
     fi
 
     echo "You need to log out and log back in to restart the gnome shell."
-    echo "Or type 'Alt+F2' and then type 'restart'."
+    echo "Or, if you're on X11, type 'Alt+F2' and then enter 'restart'."
 fi
