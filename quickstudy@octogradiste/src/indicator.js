@@ -82,7 +82,7 @@ function loadConfig() {
     }
 }
 
-const Indicator = GObject.registerClass(
+var Indicator = GObject.registerClass(
     class Indicator extends PanelMenu.Button {
         _init() {
             super._init(0.0, "QuickStudy Indicator", false);
