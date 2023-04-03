@@ -141,6 +141,8 @@ def events_to_config(events: List[Event]) -> Dict:
 
         courses.append(course)
 
+    courses = sorted(courses, key=lambda course: course["fullName"])
+
     dates = set(map(lambda event: event[2].date(), events))
     weeks = sorted(set(map(lambda date: date.isocalendar()[0:2], dates)))
     week_to_num = {f"{week[0]}-{week[1]:02}": i+1 for i, week in enumerate(weeks)}
