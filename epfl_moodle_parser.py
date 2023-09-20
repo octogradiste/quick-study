@@ -26,7 +26,7 @@ def is_short_name(tag, attrs):
 def is_href(tag, attrs):
     moodle = re.compile(r"https://moodle.epfl.ch/course/view.php\?id=\d+")
     return (tag == A and 
-            attrs.get("class") == "aalink coursename mr-2" and
+            attrs.get("class") == "aalink coursename mr-2 mb-1" and
             moodle.match(attrs.get("href")) is not None)
 
 def is_full_name(tag, attrs):
