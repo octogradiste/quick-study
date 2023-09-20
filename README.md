@@ -93,8 +93,8 @@ The items of the `autoOpen` array should be strings of the form `type-id` where 
 The following tokens will be replced by the corresponding value:
 - `$w` is replaced by the current week number.
 - `$W` is replaced by the current week number padded with a 0.
-- `$n` is the short name of the course.
-- `$N` is the name of the course.
+- `$c` is the short name of the course.
+- `$C` is the name of the course.
 - `$b` and `$B` is the base path of the course.
 
 ### Basic template
