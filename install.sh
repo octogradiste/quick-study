@@ -42,7 +42,8 @@ else
         echo "  ├ Download the your moodle page from https://moodle.epfl.ch/my/."
         read -e -p "  ├ Enter the path to the 'horaire.ics' file: " ICS
         read -e -p "  ├ Enter the path to the 'Dashboard.html' file: " DASHBOARD
-        python3 "epfl_generate_config.py" "$ICS" "$DASHBOARD" "${DIR}config.json"
+        read -e -p "  ├ Enter the base path of your folder structure: " BASE
+        python3 "epfl_generate_config.py" "$ICS" "$DASHBOARD" "$BASE" "${DIR}config.json"
         echo "  ├ Config file generated and copied to the extension folder."
         echo "  └ Edit ${DIR}config.json for further customization."
     else

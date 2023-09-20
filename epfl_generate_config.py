@@ -177,6 +177,12 @@ if __name__ == "__main__":
     )
 
     parser.add_argument(
+        "base",
+        help="Base path to folder structure.",
+        type=str
+    )
+
+    parser.add_argument(
         "output", 
         default="config.json", 
         help="Location to save the config file.",
@@ -191,6 +197,7 @@ if __name__ == "__main__":
 
     events = extract_events(lines)
     config = events_to_config(events)
+    config["basePath"] = args.base
 
     page = ""
     with open(args.moodle) as file:
